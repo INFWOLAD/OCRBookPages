@@ -42,7 +42,12 @@ def del_not_img():
 
 def cut_pic(img_path, out_img_path, coordinates):
     # If you want to set coordinates, please set here
-    coordinates_split1 = (0, 0, 2480, 3508)
+    mid_low_x = int(input("Please input your mid-low-coordinates-x"))
+    mid_low_y = int(input("Please input your mid-low-coordinates-y"))
+    right_low_x = int(input("Please input your right-low-coordinates-x"))
+    coordinates_split1 = (0, 0, mid_low_x, mid_low_y)
+    coordinates_split2 = (mid_low_x, 0, right_low_x, mid_low_y)
+
     coordinates_split2 = (2480, 0, 4960, 3508)
     coordinates_page1 = (coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1])
     coordinates_page2 = (coordinates[2][0], coordinates[2][1], coordinates[3][0], coordinates[3][1])
