@@ -1,3 +1,5 @@
+import os
+
 import cv2
 
 global i
@@ -23,14 +25,15 @@ def on_event(event, x, y, flags, img):
         cv2.destroyWindow("image")
 
 
-def mark():
+def mark(img_path):
     global coordinates
     global i
     i = 0
     coordinates = [[0, 0], [0, 0], [0, 0], [0, 0]]
     print("Now we'll help you get coordinates of pages number in your raw photo")
-    raw_photo = input("Please enter your raw photo's path(include *.jpg):")
-    img = cv2.imread(raw_photo)
+    # raw_photo = input("Please enter your raw photo's path(include *.jpg):")
+    files = os.listdir(img_path)
+    img = cv2.imread(files[0])
     cv2.namedWindow("image", cv2.WINDOW_KEEPRATIO)
     cv2.setMouseCallback("image", on_event, img)
     cv2.imshow("image", img)
