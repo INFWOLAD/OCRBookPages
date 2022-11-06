@@ -5,9 +5,11 @@ This is a function that can help you organize your book pages.
 import os
 import sys
 
-from PIL import Image, ImageEnhance
 import pytesseract
+from PIL import Image, ImageEnhance
 from tqdm import tqdm
+
+import mark
 
 
 def del_not_img():
@@ -38,12 +40,12 @@ def del_not_img():
     return img_path, out_img_path
 
 
-def cut_pic(img_path, out_img_path):
+def cut_pic(img_path, out_img_path, coordinates):
     # If you want to set coordinates, please set here
     coordinates_split1 = (0, 0, 2480, 3508)
     coordinates_split2 = (2480, 0, 4960, 3508)
-    coordinates_page1 = (83, 3340, 197, 3427)
-    coordinates_page2 = (2276, 3340, 2390, 3427)  # 2480, 4960, 3508
+    coordinates_page1 = (coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1])
+    coordinates_page2 = (coordinates[2][0], coordinates[2][1], coordinates[3][0], coordinates[3][1])
 
     print("Being process of cutting...")
     pic_name = os.listdir(img_path)
@@ -71,8 +73,9 @@ def cut_pic(img_path, out_img_path):
 
 
 def main():
+    coordinates = mark.mark()
     img_path, out_img_path = del_not_img()
-    pic_name, pages_path = cut_pic(img_path, out_img_path)
+    pic_name, pages_path = cut_pic(img_path, out_img_path, coordinates)
     # pic_name = os.listdir(out_img_path)
     # pages_path = os.path.join(img_path, "pages_number")
     print("Recognizing images' page number...")
